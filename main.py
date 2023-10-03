@@ -24,7 +24,7 @@ if __name__ == '__main__':
             faces.append(img_np[y:y + h, x:x + w])
             ids.append(2)
 
-    print('training...')
+    print('training model...')
     recog.train(faces, np.array(ids))
     recog.save('face.yml')
     print('ok!')
