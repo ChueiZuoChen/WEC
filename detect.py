@@ -1,3 +1,5 @@
+from os import name
+
 import cv2
 import mediapipe as mp
 
@@ -24,7 +26,7 @@ if __name__ == '__main__':
             size = img.shape
             w = size[1]
             h = size[0]
-            # img = cv2.resize(img, (540, 300))
+            img = cv2.resize(img, (540, 300))
             gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
             faces = face_cascade.detectMultiScale(gray)
             img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -46,14 +48,14 @@ if __name__ == '__main__':
                     cv2.circle(img, (ax - 8, ay - 8), (eye - 15), (255, 255, 255), -1)
                     cv2.circle(img, (bx - 8, by - 8), (eye - 15), (255, 255, 255), -1)
 
-            # for (x, y, w, h) in faces:
-            #     cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
-            #     idnum, confidence = recognizer.predict(gray[y:y + h, x:x + w])
-            #     if confidence < 50:
-            #         text = name[str(idnum)]
-            #     else:
-            #         text = '???'
-            #     cv2.pqutText(img, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
+            for (x, y, w, h) in faces:
+                cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
+                idnum, confidence = recognizer.predict(gray[y:y + h, x:x + w])
+                if confidence < 50:
+                    text = name[str(idnum)]
+                else:
+                    text = '???'
+                cv2.putText(img, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
 
             cv2.imshow('Potti', img)
             if cv2.waitKey(5) == ord('q'):
