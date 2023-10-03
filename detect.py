@@ -31,7 +31,7 @@ while True:
             text = '???'
         cv2.putText(img, text, (x,y-5),cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0), 2, cv2.LINE_AA)
 
-    cv2.imshow('Potti2', img)
+    cv2.imshow('default', img)
     if cv2.waitKey(5) == ord('q'):
         break
 cap.release()
